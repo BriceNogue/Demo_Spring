@@ -19,7 +19,7 @@ public class ProductService implements ProductServiceInt {
     }
 
     @Override
-    public List<Product> showProducts() {
+    public List<Product> getProducts() {
         return productRepositoryInt.findAll();
     }
 
