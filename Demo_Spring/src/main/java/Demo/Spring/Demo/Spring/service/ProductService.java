@@ -1,7 +1,7 @@
 package Demo.Spring.Demo.Spring.service;
 
 import Demo.Spring.Demo.Spring.modele.Product;
-import Demo.Spring.Demo.Spring.repository.ProductRepository;
+import Demo.Spring.Demo.Spring.repository.ProductRepositoryInt;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +11,32 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductService implements ProductServiceInt {
 
-    private final ProductRepository productRepository;
+    private final ProductRepositoryInt productRepositoryInt;
 
     @Override
     public Product createProduct(Product product) {
-        return null;
+        return productRepositoryInt.save(product);
     }
 
     @Override
     public List<Product> showProducts() {
-        return null;
+        return productRepositoryInt.findAll();
     }
 
     @Override
     public Product updateProduct(Long id, Product product) {
-        return null;
+        return productRepositoryInt.findById(id)
+                .map(p -> {
+                    p.setPrice(product.getPrice());
+                    p.setName(product.getName());
+                    p.setDescription(product.getDescription());
+                    return productRepositoryInt.save(p);
+                }).orElseThrow(() -> new RuntimeException("Product update failed"));
     }
 
     @Override
     public String deleteProduct(Long id) {
-        return null;
+        productRepositoryInt.deleteById(id);
+        return "Product deleted!";
     }
 }
