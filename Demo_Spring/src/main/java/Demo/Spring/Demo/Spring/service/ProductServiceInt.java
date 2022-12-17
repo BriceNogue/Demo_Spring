@@ -10,6 +10,8 @@ public interface ProductServiceInt {
 
     List<Product> getProducts();
 
+    Product getProduct(Long id);
+
     Product updateProduct(Long id, Product product);
 
     String deleteProduct(Long id);

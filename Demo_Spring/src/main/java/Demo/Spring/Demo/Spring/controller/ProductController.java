@@ -24,8 +24,18 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @PutMapping("/updateProduct")
-    public Product updateProduct(Long id, Product product){
-        return productService.updateProduct(id, product);
+    @GetMapping("/getProduct/{productId}")
+    public Product getProduct(@PathVariable Long productId){
+        return productService.getProduct(productId);
+    }
+
+    @PutMapping("/updateProduct/{productId}")
+    public Product updateProduct(@PathVariable Long productId, @RequestBody Product product){
+        return productService.updateProduct(productId, product);
+    }
+
+    @DeleteMapping("/deleteProduct/{productId}")
+    public String deleteProduct(@PathVariable Long productId){
+        return productService.deleteProduct(productId);
     }
 }

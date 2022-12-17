@@ -24,6 +24,11 @@ public class ProductService implements ProductServiceInt {
     }
 
     @Override
+    public Product getProduct(Long productId){
+        return productRepositoryInt.findById(productId).get();
+    }
+
+    @Override
     public Product updateProduct(Long id, Product product) {
         return productRepositoryInt.findById(id)
                 .map(p -> {
